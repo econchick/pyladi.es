@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
-  <meta name="description" content="PyLadies Unofficial Website" />
-  <meta name="keywords" content="PyLadies, Python" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PyLadies</title>
   <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-  <link rel="stylesheet" href="./theme/css/styles.min.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="./theme/css/styles.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" media="screen, projection">
+  <link rel="shortcut icon" type="image/png" href="" />
   
 </head>
-
 <body>
 <header class="main-header">
+  
+<a href="http://github.com/econchick/pyladi.es">
+<img style="position: absolute; top: 0; left: 128px; border: 0; height: 119px;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+
   <hgroup>
-    <div class="picture">
-      <a href="./theme/imgs/pic.png" rel="home"></a>
+    <div>
+      <img src="" style="margin-left: 34px; margin-top: 30px;">
     </div>
-    <h1>PyLadies</h1>
-    <h2>The Unofficial PyLadies Website.</h2>
+    <h1><a href="/" id="home-link">PyLadies</a></h1>
+    <h2></h2>
   </hgroup>
   <nav>
     <ul class="main-nav">
-      <li><a href="/" id="home-link">Home</a></li>
-      <li><a href="http://twitter.com/#!/pyladiessf" id="twitter-link">Twitter</a></li>
-      <li><a href="http://github.com/econchick/pyladi.es" id="github-link">Github</a></li>
-      <li><a href="mailto:lynn@pyladi.es?subject=Hello" id="contact-link">Contact</a></li>
+      
+        
+      
+
+      
+      <li><a href="http://twitter.com/pyladiessf">Twitter</a></li>
+      
+      <li><a href="http://facebook/PyLadiesSF">Facebook</a></li>
+      
+
+      <li><a href="./feeds/all.rss.xml" id="feed-link">Feed</a></li>
+      <li><a href="mailto:?subject=Hello" id="contact-link">Contact</a></li>
     </ul>
   </nav>
   <a href="http://pelican.notmyidea.org" class="fork-me">Powered by Pelican.</a>
@@ -40,19 +52,54 @@
     <span class="nav-btn-bar"></span>
     <span class="nav-btn-bar"></span>
   </span>
-  <h3><a href="/">github.com/econchick/pyladi.es</a></h3>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript">
-/*<![CDATA[*/
-var twitter_integration_enabled = true,
-    github_integration_enabled = true,
-    dribbble_integration_enabled = false,
-    instagram_integration_enabled = false;
-/*]]>*/
-</script>
 
-<script src="./theme/js/min/scripts.min.js"></script>
+<script src="./theme/js/libs/jquery-1.7.2.min.js"></script>
+<script src="./theme/js/libs/jquery.url.js"></script>
+<script src="./theme/js/libs/bootstrap-modal.js"></script>
+<script src="./theme/js/libs/handlebars.js"></script>
+<script src="./theme/js/libs/spin.min.js"></script>
+<script src="./theme/js/libs/moment.min.js"></script>
+<script src="./theme/js/common.js"></script>
+
+
+<script src="./theme/js/libs/github.js"></script>
+
+
+
+
+
+<script src="./theme/js/libs/twitter.js"></script>
+
+
+
+
+<script>
+    // Function to get the Maximam value in Array
+    Array.max = function( array ) {
+        return Math.max.apply( Math, array );
+    };
+
+    var heights = [];
+    heights.push($('.main-header').height());
+    heights.push($('.main-section').height());
+    heights.push($(window).height());
+
+    var max_height = Array.max(heights);
+    $('.main-header').height(max_height+80);
+
+
+    var github_username = '';
+
+
+
+
+
+    var twitter_username = '@pyladiessf';
+
+
+
+</script>
 
 
 </body>
