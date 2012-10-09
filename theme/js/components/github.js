@@ -1,46 +1,92 @@
+/*
+UI functions dedicated to the Github modal panel
+*/
 
-function setupGithub(url, el) {
-  var href = el.href;
+var github_api_user = 'https://api.github.com/users/';
+var github_api_repos = '/repos';
 
-  if ($('#github-profile').length > 0) {
-    window.location = href;
-    return;
-  }
+var spinner = (new Spinner(spin_opts)).spin();
+var template = null;
+var url = null;
+var github_data = {};
 
-  var params = url.attr('path').split('/').filter(function(w) {
-      if (w.length)
-          return true;
-      return false;
-  })
+$('a[id^="github-link"]').click(function (e)
+{
+    var url = prepare_link(e, this);
+    adjustSelection("github-link");
+    remove_modal();
+    showGithub(url, this);
+});
 
-  if (params.length == 1) {
-     var username = params[0];
+function showGithub(e, t) {
+    url = t.href;
+    var github_profile = $("#github-profile");
+    if (github_profile.length > 0) {
+        github_profile.modal('show');
+    }
+    else {
+        $("#github-link").append(spinner.el);
 
-     var spinner = new Spinner(spin_opts).spin();
-     $('#github-link').append(spinner.el);
+        $.get('/theme/templates/github-view.html', function(data) {
+            // Request succeeded, data contains HTML template, we can load data
+            template = Handlebars.compile(data);
+            var user_url = github_api_user+github_username;
 
-     require(["json!/github/" + username, "text!templates/github-view.html"],
-        function(github_data, github_view) {
-            if (github_data.error || github_data.length == 0) {
-                window.location = href;
-                return;
+            try {
+                $.ajax({
+                    url: user_url,
+                    dataType: "jsonp",
+                    jsonpCallback: "readGithubData",
+                    error: function(s, statusCode, errorThrown) {
+                        window.location.href = url;
+                        spinner.stop();
+                    }
+                });
             }
-
-            var template = Handlebars.compile(github_view);
-            github_data.user.following_count = numberWithCommas(github_data.user.following_count)
-            github_data.user.followers_count = numberWithCommas(github_data.user.followers_count)
-
-            $(template(github_data)).modal().on('hidden', function () {
-                $(this).remove();
-                adjustSelection('home-link');
-            })
-
+            catch (err) {
+                window.location.href = url;
+                spinner.stop();
+            }
+        })
+        .error(function() {
+            window.location.href = url;
             spinner.stop();
-
         });
+    }
+}
 
-     return;
-  }
+function readGithubData(user) {
+    try {
+        github_data['user'] = user.data
 
-  window.location = href;
+        var repos_url = github_api_user+github_username+github_api_repos;
+        $.ajax({
+            url: repos_url,
+            dataType: "jsonp",
+            jsonpCallback: "readRepositories",
+            error: function(s, statusCode, errorThrown) {
+                window.location.href = url;
+                spinner.stop();
+            }
+        });
+    }
+    catch (err) {
+        window.location.href = url;
+        spinner.stop();
+    }
+}
+
+function readRepositories(repos) {
+    try {
+        github_data['repositories'] = repos.data
+
+        var html = template(github_data);
+        $('body').append(html);
+        $("#github-profile").modal();
+        spinner.stop();
+    }
+    catch (err) {
+        window.location.href = url;
+        spinner.stop();
+    }
 }

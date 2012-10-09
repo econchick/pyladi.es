@@ -1,82 +1,112 @@
+/*
+UI functions dedicated to the Twitter modal panel
+*/
 
-function setupTwitter(url, el) {
-  var href = el.href;
+var twitter_api_user = 'https://twitter.com/users/';
+var twitter_api_timeline = 'https://api.twitter.com/1/statuses/user_timeline.json?screen_name=';
+var twitter_api_json = '.json';
 
-  if ($('#twitter-profile').length > 0) {
-    window.location = href;
-    return;
-  }
+var spinner = (new Spinner(spin_opts)).spin();
+var template = null;
+var url = null;
+var twitter_data = {};
 
-  var params = url.attr('path').split('/').filter(function(w) {
-      if (w.length)
-          return true;
-      return false;
-  })
+$('a[id^="twitter-link"]').click(function (e)
+{
+    var url = prepare_link(e, this);
+    adjustSelection("twitter-link");
+    remove_modal();
+    showTwitter(url, this);
+});
 
-  if (params.length == 1) {
-     var username = params[0];
+function showTwitter(e, t) {
+    url = t.href;
+    var twitter_profile = $("#twitter-profile");
+    if (twitter_profile.length > 0) {
+        twitter_profile.modal('show');
+    }
+    else {
+        $("#twitter-link").append(spinner.el);
 
-     var spinner = new Spinner(spin_opts).spin();
-     $('#twitter-link').append(spinner.el);
+        $.get('/theme/templates/twitter-view.html', function(data) {
+            // Request succeeded, data contains HTML template, we can load data
+            template = Handlebars.compile(data);
+            var user_url = twitter_api_user+twitter_username+twitter_api_json;
 
-     require(["json!/twitter/" + username, "text!templates/twitter-view.html"], 
-        function(twitter_data, twitter_view) {
-            if (twitter_data.error || twitter_data.length == 0) {
-                window.location = href;
-                return;
+            try {
+                $.ajax({
+                    url: user_url,
+                    dataType: "jsonp",
+                    jsonpCallback: "readTwitterData",
+                    error: function(s, statusCode, errorThrown) {
+                        window.location.href = url;
+                        spinner.stop();
+                    }
+                });
             }
-
-            var template = Handlebars.compile(twitter_view);
-
-            var tweets = [];
-            $.each(twitter_data, function(i, t) {
-              if (i > 3)
-                return;
-
-              //'ddd MMM DD HH:mm:ss ZZ YYYY'
-              t.formated_date = moment(t.created_at).fromNow();
-              t.f_text = twitterLinkify(t.text);
-              tweets.push(t);
-            });
-
-            var user = twitter_data[0].user;
-            user.statuses_count = numberWithCommas(user.statuses_count);
-            user.friends_count = numberWithCommas(user.friends_count);
-            user.followers_count = numberWithCommas(user.followers_count);
-            user.f_description = twitterLinkify(user.description);
-
-            var template_data = {
-                "user": user,
-                "tweets": tweets
+            catch (err) {
+                window.location.href = url;
+                spinner.stop();
             }
-
-            $(template(template_data)).modal().on('hidden', function () {
-                $(this).remove();
-                adjustSelection('home-link');
-            })
-
+        })
+        .error(function() {
+            window.location.href = url;
             spinner.stop();
         });
-
-     return;
-  }
-
-  window.location = href;
+    }
 }
 
-function twitterLinkify(text) {
-  text = text.replace(/(https?:\/\/\S+)/gi, function (s) {
-    return '<a href="' + s + '">' + s + '</a>';
-  });
+function readTwitterData(user) {
+    try {
+        user.statuses_count = numberWithCommas(user.statuses_count);
+        user.friends_count = numberWithCommas(user.friends_count);
+        user.followers_count = numberWithCommas(user.followers_count);
+        user.description = twitterLinkify(user.description);
+        twitter_data['user'] = user
 
-  text = text.replace(/(^|) @(\w+)/gi, function (s) {
-    return '<a href="http://twitter.com/' + s + '">' + s + '</a>';
-  });
-
-  text = text.replace(/(^|) #(\w+)/gi, function (s) {
-    return '<a href="http://search.twitter.com/search?q=' + s.replace(/#/,'%23') + '">' + s + '</a>';
-  });
-
-  return text;
+        var tweets_url = twitter_api_timeline+twitter_username;
+        $.ajax({
+            url: tweets_url,
+            dataType: "jsonp",
+            jsonpCallback: "readTweets",
+            error: function(s, statusCode, errorThrown) {
+                window.location.href = url;
+                spinner.stop();
+            }
+        });
+    }
+    catch (err) {
+        window.location.href = url;
+        spinner.stop();
+    }
 }
 
+function readTweets(tweets) {
+    try {
+        for(var index = 0 ; index < tweets.length ; index++) {
+            var tweet = tweets[index];
+            tweet.formated_date = moment(tweet.created_at).fromNow();
+            tweet.text = twitterLinkify(tweet.text);
+        }
+        twitter_data['tweets'] = tweets
+        
+        var html = template(twitter_data);
+        $('body').append(html);
+        $("#twitter-profile").modal();
+        spinner.stop();
+    }
+    catch (err) {
+        window.location.href = url;
+        spinner.stop();
+    }
+}
+
+function twitterLinkify(e) {
+    return e = e.replace(/(https?:\/\/\S+)/gi, function (e) {
+        return '<a href="' + e + '">' + e + "</a>"
+    }), e = e.replace(/(^|) @(\w+)/gi, function (e) {
+        return '<a href="http://twitter.com/' + e + '">' + e + "</a>"
+    }), e = e.replace(/(^|) #(\w+)/gi, function (e) {
+        return '<a href="http://search.twitter.com/search?q=' + e.replace(/#/, "%23") + '">' + e + "</a>"
+    }), e
+}
