@@ -61,10 +61,10 @@ function showMeetup(e, t) {
 function readMeetupData(results) {
     try {
         console.log(results.results[0])
-        results[0].name = numberWithCommas(results[0].name)
-        results.rating = numberWithCommas(results.rating)
-        results.description = meetupLinkify(results.description)
-        meetup_data['group'] = results[0];
+        results.results[0].name = numberWithCommas(results.results.[0].name)
+        results.results[0].rating = numberWithCommas(results.results[0].rating)
+        results.results[0].description = meetupLinkify(results.results[0].description)
+        meetup_data['group'] = results.results[0];
 
         var events_url = meetup_api_events+meetup_key+signed+group_url;
         $.ajax({
@@ -85,12 +85,12 @@ function readMeetupData(results) {
 
 function readEvents(events) {
     try {
-        for(var index = 0 ; index < events.length ; index++) {
-            var event_ = events[index];
+        for(var index = 0 ; index < events.events.length ; index++) {
+            var event_ = events.events.[index];
             event_.formated_date = moment(event_.time).fromNow();
             event_.text = meetupLinkify(event_.description);
         }
-        meetup_data['events'] = events
+        meetup_data['events'] = events.events
         
         var html = template(meetup_data);
         $('body').append(html);
