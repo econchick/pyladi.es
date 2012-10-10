@@ -7,6 +7,7 @@ var meetup_api_events = 'https://api.meetup.com/2/events?';
 var meetup_key = 'key=';
 var signed = '&sign=true';
 var group_url = '&group_urlname=';
+var meetup_api_json = '.json';
 
 var spinner = (new Spinner(spin_opts)).spin();
 var template = null;
@@ -33,7 +34,7 @@ function showMeetup(e, t) {
         $.get('/theme/templates/meetup-view.html', function(data) {
             // Request succeeded, data contains HTML template, we can load data
             template = Handlebars.compile(data);
-            var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname;
+            var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname+meetup_api_json;
 
             try {
                 $.ajax({
@@ -65,7 +66,7 @@ function readMeetupData(results) {
         results.results[0].description = meetupLinkify(results.results[0].description);
         meetup_data['group'] = results.results[0];
 
-        var events_url = meetup_api_events+meetup_key+meetup_api_key+signed+group_url+group_urlname;
+        var events_url = meetup_api_events+meetup_key+meetup_api_key+signed+group_url+group_urlname+meetup_api_json;
         $.ajax({
             url: events_url,
             dataType: "jsonp",
