@@ -60,13 +60,12 @@ function showMeetup(e, t) {
 
 function readMeetupData(results) {
     try {
-        console.log(results.results[0]);
         results.results[0].name = numberWithCommas(results.results[0].name);
         results.results[0].rating = numberWithCommas(results.results[0].rating);
         results.results[0].description = meetupLinkify(results.results[0].description);
         meetup_data['group'] = results.results[0];
 
-        var events_url = meetup_api_events+meetup_key+signed+group_url;
+        var events_url = meetup_api_events+meetup_key+meetup_api_key+signed+group_urlname;
         $.ajax({
             url: events_url,
             dataType: "jsonp",
