@@ -38,7 +38,7 @@ function showMeetup(e, t) {
             try {
                 $.ajax({
                     url: user_url,
-                    console.log(url)
+                    console.log(url),
                     dataType: "jsonp",
                     jsonpCallback: "readMeetupData",
                     error: function(s, statusCode, errorThrown) {
