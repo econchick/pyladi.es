@@ -91,8 +91,7 @@ function readEvents(events) {
             event_x.description = meetupLinkify(event_x.description);
         }
         meetup_data['events'] = events.results; 
-        console.log(template)
-        console.log(meetup_data)   
+        console.log(template(meetup_data))
         var html = template(meetup_data);
         $('body').append(html);
         $("#meetup-profile").modal();
