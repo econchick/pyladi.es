@@ -66,7 +66,7 @@ function readMeetupData(results) {
         results.results[0].description = meetupLinkify(results.results[0].description);
         meetup_data['group'] = results.results[0];
 
-        var events_url = meetup_api_events+meetup_key+meetup_api_key+signed+group_url+group_urlname+meetup_api_json;
+        var events_url = meetup_api_events+meetup_key+meetup_api_key+signed+group_url+group_urlname;
         $.ajax({
             url: events_url,
             dataType: "jsonp",
@@ -93,6 +93,7 @@ function readEvents(events) {
         meetup_data['events'] = events.results
         
         var html = template(meetup_data);
+        console.log(meetup_data)
         $('body').append(html);
         $("#meetup-profile").modal();
         spinner.stop();
