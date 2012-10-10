@@ -45,7 +45,6 @@ function showMeetup(e, t) {
                         spinner.stop();
                     }
                 });
-                console.log(user_url)
             }
             catch (err) {
                 window.location.href = url;
@@ -61,7 +60,7 @@ function showMeetup(e, t) {
 
 function readMeetupData(group) {
     try {
-        console.log(group.name)
+        console.log(group.description)
         group.members = numberWithCommas(group.members)
         group.rating = numberWithCommas(group.rating)
         group.description = meetupLinkify(group.description)
