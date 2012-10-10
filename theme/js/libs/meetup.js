@@ -90,10 +90,9 @@ function readEvents(events) {
             event_x.formatted_date = moment(event_x.time).fromNow();
             event_x.description = meetupLinkify(event_x.description);
         }
-        meetup_data['events'] = events.results;
-        console.log('xxx');        
+        meetup_data['events'] = events.results; 
+        console.log(template)    
         var html = template(meetup_data);
-        console.log('xxxx');
         $('body').append(html);
         $("#meetup-profile").modal();
         spinner.stop();
