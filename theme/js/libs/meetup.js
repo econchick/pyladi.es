@@ -34,7 +34,7 @@ function showMeetup(e, t) {
         $.get('/theme/templates/meetup-view.html', function(data) {
             // Request succeeded, data contains HTML template, we can load data
             template = Handlebars.compile(data);
-            var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname+meetup_api_json;
+            var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname;
 
             try {
                 $.ajax({
