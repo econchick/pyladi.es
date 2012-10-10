@@ -88,9 +88,12 @@ function readTweets(tweets) {
             tweet.formated_date = moment(tweet.created_at).fromNow();
             tweet.text = twitterLinkify(tweet.text);
         }
-        twitter_data['tweets'] = tweets
+        twitter_data['tweets'] = tweets;
+
+        console.log(template);
         
         var html = template(twitter_data);
+        console.log(html)
         $('body').append(html);
         $("#twitter-profile").modal();
         spinner.stop();
