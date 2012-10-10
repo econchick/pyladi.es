@@ -38,7 +38,6 @@ function showMeetup(e, t) {
             try {
                 $.ajax({
                     url: user_url,
-                    console.log(url),
                     dataType: "jsonp",
                     jsonpCallback: "readMeetupData",
                     error: function(s, statusCode, errorThrown) {
@@ -46,6 +45,7 @@ function showMeetup(e, t) {
                         spinner.stop();
                     }
                 });
+                console.log(user_url)
             }
             catch (err) {
                 window.location.href = url;
