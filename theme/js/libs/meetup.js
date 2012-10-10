@@ -60,7 +60,7 @@ function showMeetup(e, t) {
 
 function readMeetupData(results) {
     try {
-        console.log(results)
+        console.log(results[0])
         results[0].name = numberWithCommas(results[0].name)
         results.rating = numberWithCommas(results.rating)
         results.description = meetupLinkify(results.description)
