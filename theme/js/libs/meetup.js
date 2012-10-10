@@ -4,10 +4,9 @@ UI functions dedicated to the Meetup modal panel
 
 var meetup_api_group = 'https://api.meetup.com/2/groups?';
 var meetup_api_events = 'https://api.meetup.com/2/events?';
-//var twitter_api_json = '.json';
 var meetup_key = 'key={{ MEETUP_API_KEY }}';
 var signed = '&signed=true';
-var group_url = '{{ MEETUP_GROUP_URL }}';
+var group_url = 'group_urlname={{ MEETUP_GROUP_URL }}';
 
 var spinner = (new Spinner(spin_opts)).spin();
 var template = null;
