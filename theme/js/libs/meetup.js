@@ -84,7 +84,9 @@ function readMeetupData(results) {
 
 function readEvents(events) {
     try {
-        console.log(events[0].name)
+        console.log('xxx')
+        console.log(events)
+        console.log(events[1])
         for(var index = 0 ; index < events.events.length ; index++) {
             var event_ = events.events[index];
             event_.formated_date = moment(event_.time).fromNow();
