@@ -84,19 +84,16 @@ function readMeetupData(results) {
 
 function readEvents(events) {
     try {
-        console.log('xxx')
-        console.log(events)
-        console.log(events.results[0])
         for(var index = 0 ; index < events.results.length ; index++) {
-            var event_ = events.results[index];
-            event_.formated_date = moment(event_.time).fromNow();
-            event_.text = meetupLinkify(event_.description);
+            var event_x = events.results[index];
+            event_x.formated_date = moment(event_x.time).fromNow();
+            event_x.text = meetupLinkify(event_x.description);
         }
         meetup_data['events'] = events.results
         
         var html = template(meetup_data);
         $('body').append(html);
-        $("#tmeetup-profile").modal();
+        $("#meetup-profile").modal();
         spinner.stop();
     }
     catch (err) {
