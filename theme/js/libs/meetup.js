@@ -86,7 +86,7 @@ function readEvents(events) {
     try {
         console.log('xxx')
         console.log(events)
-        console.log(events[1])
+        console.log(events.events)
         for(var index = 0 ; index < events.events.length ; index++) {
             var event_ = events.events[index];
             event_.formated_date = moment(event_.time).fromNow();
