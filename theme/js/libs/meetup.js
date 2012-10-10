@@ -93,7 +93,7 @@ function readEvents(events) {
         meetup_data['events'] = events.results;
         
         var html = template(meetup_data);
-        console.log(html)
+        console.log('xxx')
         $('body').append(html);
         $("#meetup-profile").modal();
         spinner.stop();
