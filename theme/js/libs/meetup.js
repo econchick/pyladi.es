@@ -88,11 +88,11 @@ function readEvents(events) {
         console.log(events)
         console.log(events.results[0])
         for(var index = 0 ; index < events.results.length ; index++) {
-            var event_ = events.events[index];
+            var event_ = events.results[index];
             event_.formated_date = moment(event_.time).fromNow();
             event_.text = meetupLinkify(event_.description);
         }
-        meetup_data['events'] = events.events
+        meetup_data['events'] = events.results
         
         var html = template(meetup_data);
         $('body').append(html);
