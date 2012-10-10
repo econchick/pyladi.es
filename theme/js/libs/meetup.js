@@ -31,7 +31,7 @@ function showMeetup(e, t) {
     else {
         $("#meetup-link").append(spinner.el);
 
-        $.get('/theme/templates/twitter-view.html', function(data) {
+        $.get('/theme/templates/meetup-view.html', function(data) {
             // Request succeeded, data contains HTML template, we can load data
             template = Handlebars.compile(data);
             var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname;
@@ -91,7 +91,8 @@ function readEvents(events) {
             event_x.description = meetupLinkify(event_x.description);
         }
         meetup_data['events'] = events.results; 
-        console.log(template)    
+        console.log(template)
+        console.log(meetup_data)   
         var html = template(meetup_data);
         $('body').append(html);
         $("#meetup-profile").modal();
