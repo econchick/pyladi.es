@@ -1,0 +1,50 @@
+<div class="profile meetup modal fade" id="meetup-profile">
+  {{#with user}}
+  <div class="profile-info">
+    <button class="close" data-dismiss="modal">×</button>
+    <a href="http://www.meetup.com/{{ group_name }}" class="profile-avatar">
+      <img src="{{ group_photo.photo_link }}" alt="{{name}}" />
+    </a>
+    <div class="profile-name">
+      <h2><a href="http://www.meetup.com/{{ urlname }}">{{ name }}</a></h2>
+      <h3><a href="http://www.meetup.com/{{ urlname }}">{{ who }}</a></h3>
+    </div>
+    <p class="profile-description">{{{ description }}}</p>
+    <p class="profile-location-url">
+      {{#if city }}
+      <span>{{ city }}, {{ state }}</span>
+      <span class="divider">·</span>
+      {{/if}}
+      {{#if link }}
+      <span><a href="{{ link }}">{{ link }}</a></span>
+      {{/if}}
+    </p>
+  </div>
+  <ul class="profile-stats">
+    <li><a href="http://www.meetup.com/{{ urlname }}/members"><strong>{{ members }}</strong> members</a></li>
+    <li><a href="http://www.meetup.com/{{ urlname }}/following"><strong>{{ rating }}</strong> group rating</a></li>
+  </ul>
+  <div class="profile-info-footer">
+    <a href="http://www.meetup.com/{{ urlname }}/join" class="btn">Join {{ name }}!</a>
+  </div>
+  {{/with}}
+  <ul class="profile-events">
+    {{#each events}}
+      <li>
+        {{#with group }}
+        <a href="http://www.meetup.com/{{ urlname }}" class="event-title">
+          <img src="{{ group_photo.photo_link }}" alt="{{ name }}" />
+          <strong>{{ name }}</strong>
+          <span>{{ name }}</span>
+        </a>
+        {{/with}}
+        <p class="event-text">
+        {{{ text }}}
+        </p>
+        <p class="event-date">
+          {{ formated_date }}
+        </p>
+      </li>
+    {{/each}}
+  </ul>
+</div>
