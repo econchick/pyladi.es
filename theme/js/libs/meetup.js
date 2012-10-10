@@ -91,10 +91,11 @@ function readEvents(events) {
             event_x.description = meetupLinkify(event_x.description);
         }
         meetup_data['events'] = events.results; 
-        console.log(template(meetup_data))
+
         var html = template(meetup_data);
         $('body').append(html);
         $("#meetup-profile").modal();
+        console.log($("#meetup-profile").modal());
         spinner.stop();
     }
     catch (err) {
