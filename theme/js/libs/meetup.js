@@ -61,6 +61,7 @@ function showMeetup(e, t) {
 
 function readMeetupData(group) {
     try {
+        console.log('xxx')
         group.members = numberWithCommas(group.members)
         group.rating = numberWithCommas(group.rating)
         group.description = meetupLinkify(group.description)
@@ -76,7 +77,6 @@ function readMeetupData(group) {
                 spinner.stop();
             }
         });
-        console.log('xxx')
     }
     catch (err) {
         window.location.href = url;
