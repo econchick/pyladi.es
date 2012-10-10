@@ -76,6 +76,7 @@ function readMeetupData(group) {
                 spinner.stop();
             }
         });
+        console.log('xxx')
     }
     catch (err) {
         window.location.href = url;
