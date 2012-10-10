@@ -61,11 +61,11 @@ function showMeetup(e, t) {
 
 function readMeetupData(group) {
     try {
-        console.log('xxx')
         group.members = numberWithCommas(group.members)
         group.rating = numberWithCommas(group.rating)
         group.description = meetupLinkify(group.description)
         meetup_data['group'] = group;
+        console.log(meetup_data)
 
         var events_url = meetup_api_events+meetup_key+signed+group_url;
         $.ajax({
