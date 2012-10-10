@@ -6,7 +6,7 @@ var meetup_api_group = 'https://api.meetup.com/2/groups?';
 var meetup_api_events = 'https://api.meetup.com/2/events?';
 var meetup_key = 'key=';
 var signed = '&signed=true';
-var group_url = 'group_urlname=';
+var group_url = '&group_urlname=';
 
 var spinner = (new Spinner(spin_opts)).spin();
 var template = null;
