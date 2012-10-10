@@ -66,7 +66,6 @@ function readMeetupData(results) {
         meetup_data['group'] = results.results[0];
 
         var events_url = meetup_api_events+meetup_key+meetup_api_key+signed+group_url+group_urlname;
-        console.log(events_url)
         $.ajax({
             url: events_url,
             dataType: "jsonp",
@@ -85,7 +84,7 @@ function readMeetupData(results) {
 
 function readEvents(events) {
     try {
-        console.log(events)
+        console.log(events.events[0].name)
         for(var index = 0 ; index < events.events.length ; index++) {
             var event_ = events.events[index];
             event_.formated_date = moment(event_.time).fromNow();
