@@ -36,9 +36,9 @@ function showMeetup(e, t) {
             var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname;
 
             try {
-                console.log('xxx')
                 $.ajax({
                     url: user_url,
+                    console.log(url)
                     dataType: "jsonp",
                     jsonpCallback: "readMeetupData",
                     error: function(s, statusCode, errorThrown) {
@@ -48,7 +48,6 @@ function showMeetup(e, t) {
                 });
             }
             catch (err) {
-                console.log(err)
                 window.location.href = url;
                 spinner.stop();
             }
