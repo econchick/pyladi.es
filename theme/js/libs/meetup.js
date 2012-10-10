@@ -86,7 +86,7 @@ function readMeetupData(results) {
 function readEvents(events) {
     try {
         for(var index = 0 ; index < events.events.length ; index++) {
-            var event_ = events.events.[index];
+            var event_ = events.events[index];
             event_.formated_date = moment(event_.time).fromNow();
             event_.text = meetupLinkify(event_.description);
         }
