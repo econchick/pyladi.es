@@ -66,6 +66,7 @@ function readMeetupData(results) {
         meetup_data['group'] = results.results[0];
 
         var events_url = meetup_api_events+meetup_key+meetup_api_key+signed+group_urlname;
+        console.log(events_url)
         $.ajax({
             url: events_url,
             dataType: "jsonp",
