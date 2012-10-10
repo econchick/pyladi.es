@@ -87,13 +87,13 @@ function readEvents(events) {
     try {
         for(var index = 0 ; index < events.results.length ; index++) {
             var event_x = events.results[index];
-            event_x.formated_date = moment(event_x.time).fromNow();
-            event_x.text = meetupLinkify(event_x.description);
+            event_x.formatted_date = moment(event_x.time).fromNow();
+            event_x.description = meetupLinkify(event_x.description);
         }
         meetup_data['events'] = events.results;
-        
+        console.log('xxx');        
         var html = template(meetup_data);
-        console.log('xxx')
+        console.log('xxxx');
         $('body').append(html);
         $("#meetup-profile").modal();
         spinner.stop();
