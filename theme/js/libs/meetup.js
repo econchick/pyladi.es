@@ -2,8 +2,8 @@
 UI functions dedicated to the Meetup modal panel
 */
 
-var meetup_api_group = 'https://api.meetup.com/2/groups?';
-var meetup_api_events = 'https://api.meetup.com/2/events?';
+var meetup_api_group = 'https://api.meetup.com/2/groups.json/?';
+var meetup_api_events = 'https://api.meetup.com/2/events.json/?';
 var meetup_key = 'key=';
 var signed = '&sign=true';
 var group_url = '&group_urlname=';
@@ -34,7 +34,7 @@ function showMeetup(e, t) {
         $.get('/theme/templates/meetup-view.html', function(data) {
             // Request succeeded, data contains HTML template, we can load data
             template = Handlebars.compile(data);
-            var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname+meetup_api_json;
+            var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname;
 
             try {
                 $.ajax({

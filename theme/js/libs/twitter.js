@@ -89,8 +89,6 @@ function readTweets(tweets) {
             tweet.text = twitterLinkify(tweet.text);
         }
         twitter_data['tweets'] = tweets;
-
-        console.log(template);
         
         var html = template(twitter_data);
         console.log(html)
