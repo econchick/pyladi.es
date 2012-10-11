@@ -1,5 +1,5 @@
 <div class="profile meetup modal fade" id="meetup-profile">
-  {{#with group}}
+  {{#with groups}}
   <div class="profile-info">
     <button class="close" data-dismiss="modal">×</button>
     <a href="http://www.meetup.com/{{ group_name }}" class="profile-avatar">
@@ -31,7 +31,7 @@
   <ul class="profile-events">
     {{#each events}}
       <li>
-        {{#with group }}
+        {{#with groups}}
         <a href="http://www.meetup.com/{{ urlname }}" class="event-title">
           <img src="{{ group_photo.photo_link }}" alt="{{ name }}" />
           <strong>{{ name }}</strong>

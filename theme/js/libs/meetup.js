@@ -95,7 +95,6 @@ function readEvents(events) {
         var html = template(meetup_data);
         $('body').append(html);
         $("#meetup-profile").modal();
-        console.log($("#meetup-profile").modal());
         spinner.stop();
     }
     catch (err) {
