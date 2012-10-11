@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>PyLadies</title><link>http://pyladi.es/</link><description></description><atom:link href="http://pyladi.es/feeds/content.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 10 Oct 2012 18:05:54 +0200</lastBuildDate><item><title>Blogs We Like</title><link>http://pyladi.es/2012/10/10/blogroll</link><description>&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.women2.com"&gt;Women 2.0&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.devchix.com"&gt;DevChix&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://pyfound.blogspot.com"&gt;The PSF Blog&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://psf-outreach.org"&gt;PSF Outreach and Education Committee Blog&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lynn Root</dc:creator><pubDate>Wed, 10 Oct 2012 18:05:54 +0200</pubDate><guid>tag:pyladi.es,2012-10-10:2012/10/10/blogroll</guid></item></channel></rss>
