@@ -34,7 +34,7 @@ function showMeetup(e, t) {
         $.get('/theme/templates/meetup-view.html', function(data) {
             // Request succeeded, data contains HTML template, we can load data
             template = Handlebars.compile(data);
-            var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname;
+            var user_url = meetup_api_group+meetup_key+meetup_api_key+signed+group_url+group_urlname+meetup_api_json;
 
             try {
                 $.ajax({
@@ -63,7 +63,6 @@ function readMeetupData(results) {
     try {
         results.results[0].name = numberWithCommas(results.results[0].name);
         results.results[0].rating = numberWithCommas(results.results[0].rating);
-        results.results[0].description = meetupLinkify(results.results[0].description);
         meetup_data['group'] = results.results[0];
 
         var events_url = meetup_api_events+meetup_key+meetup_api_key+signed+group_url+group_urlname;
@@ -88,7 +87,6 @@ function readEvents(events) {
         for(var index = 0 ; index < events.results.length ; index++) {
             var event_x = events.results[index];
             event_x.formatted_date = moment(event_x.time).fromNow();
-            event_x.description = meetupLinkify(event_x.description);
         }
         meetup_data['events'] = events.results; 
 
@@ -101,14 +99,4 @@ function readEvents(events) {
         window.location.href = url;
         spinner.stop();
     }
-}
-
-function meetupLinkify(e) {
-    return e = e.replace(/(https?:\/\/\S+)/gi, function (e) {
-        return '<a href="' + e + '">' + e + "</a>"
-    }), e = e.replace(/(^|) @(\w+)/gi, function (e) {
-        return '<a href="http://twitter.com/' + e + '">' + e + "</a>"
-    }), e = e.replace(/(^|) #(\w+)/gi, function (e) {
-        return '<a href="http://search.twitter.com/search?q=' + e.replace(/#/, "%23") + '">' + e + "</a>"
-    }), e
 }
